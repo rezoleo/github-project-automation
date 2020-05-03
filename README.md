@@ -1,12 +1,15 @@
 # GitHub project automation
 
-> A GitHub App built with [Probot](https://github.com/probot/probot) that automates your GitHub Project by adding new issues and PRs
+> A GitHub App built with [Probot](https://github.com/probot/probot) that automates your GitHub Project by adding new
+> issues and PRs
 
 ## Installation
 
 Install the app (TODO), then create a `.github/github-project-automation.yml` file with the following content:
 ```yaml
 project: "Name of your project (mandatory)"
+
+# The rest of the configuration is optional
 issues:
   column: "Column to send issues to (default 'To do')"
 pullRequests:
@@ -16,6 +19,30 @@ pullRequests:
 The app will then automatically add any new issue or PR to the configured project.
 
 Note: only repository projects are supported at the moment, support for organization projects is planned.
+
+## Deployment
+
+If you want to run the code yourself you can follow Probot documentation for a standard install, or use the provided
+Dockerfile (or the image `rezoleo/github-project-automation` TODO). The following `docker-compose.yml` configuration is provided
+as a reference:
+
+```yaml
+version: '3'
+
+services:
+  probot:
+    image: rezoleo/github-project-automation
+    ports:
+      - 3000:3000
+    environment:
+      APP_ID: 12345
+      WEBHOOK_SECRET: "this is a secret"
+      PRIVATE_KEY: |
+        -----BEGIN RSA PRIVATE KEY-----
+        your private key
+        -----END RSA PRIVATE KEY-----
+      #LOG_LEVEL: debug  # if you need to debug something, default is "info" 
+```
 
 ## Development
 
