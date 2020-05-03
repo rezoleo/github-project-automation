@@ -4,7 +4,7 @@
   "private": true,
   "description": "Automate your GitHub Project by adding new issues and PRs",
   "author": "Thomas Gaudin <thomas.gaudin@centraliens-lille.org>",
-  "license": "ISC",
+  "license": "MIT",
   "repository": "https://github.com/nymous/github-project-automation.git",
   "homepage": "https://github.com/nymous/github-project-automation",
   "bugs": "https://github.com/nymous/github-project-automation/issues",
@@ -40,7 +40,7 @@
     "typescript": "^3.6.4"
   },
   "engines": {
-    "node": ">= 8.3.0"
+    "node": ">= 12.16.0"
   },
   "standard": {
     "parser": "@typescript-eslint/parser",

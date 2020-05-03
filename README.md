@@ -1,8 +1,10 @@
 # github-project-automation
 
-> A GitHub App built with [Probot](https://github.com/probot/probot) that Automate your GitHub Project by adding new issues and PRs
+> A GitHub App built with [Probot](https://github.com/probot/probot) that automates your GitHub Project by adding new issues and PRs
 
 ## Setup
+
+You need Node >= 12.16
 
 ```sh
 # Install dependencies
@@ -24,4 +26,4 @@ For more, check out the [Contributing Guide](CONTRIBUTING.md).
 
 ## License
 
-[ISC](LICENSE) © 2020 Thomas Gaudin <thomas.gaudin@centraliens-lille.org>
+[MIT](LICENSE) © 2020 Thomas Gaudin <thomas.gaudin@centraliens-lille.org>
