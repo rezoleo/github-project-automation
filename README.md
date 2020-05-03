@@ -1,8 +1,23 @@
-# github-project-automation
+# GitHub project automation
 
 > A GitHub App built with [Probot](https://github.com/probot/probot) that automates your GitHub Project by adding new issues and PRs
 
-## Setup
+## Installation
+
+Install the app (TODO), then create a `.github/github-project-automation.yml` file with the following content:
+```yaml
+project: "Name of your project (mandatory)"
+issues:
+  column: "Column to send issues to (default 'To do')"
+pullRequests:
+  column: "Column to send PRs to (default 'In progress')"
+```
+
+The app will then automatically add any new issue or PR to the configured project.
+
+Note: only repository projects are supported at the moment, support for organization projects is planned.
+
+## Development
 
 You need Node >= 12.16
 

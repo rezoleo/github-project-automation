@@ -1,5 +1,28 @@
 import { Context, Octokit } from 'probot' // eslint-disable-line no-unused-vars
 
+interface DefaultConfig {
+  issues: { column: string }
+  pullRequests: { column: string }
+}
+
+type Config = DefaultConfig & {project: string}
+
+const DEFAULT_CONFIG: DefaultConfig = {
+  issues: { column: 'To do' },
+  pullRequests: {
+    column: 'In progress'
+  }
+}
+
+export async function getConfig (context: Context) {
+  const config = await context.config<DefaultConfig>('github-project-automation.yml', DEFAULT_CONFIG) as Config
+
+  if (!config.project) {
+    throw new Error('`project` was not configured')
+  }
+  return config
+}
+
 export async function findProject (context: Context, projectName: string) {
   const listProjectsOptions = context.github.projects.listForRepo.endpoint.merge(context.repo())
   for await (const response of context.github.paginate.iterator(listProjectsOptions)) {
