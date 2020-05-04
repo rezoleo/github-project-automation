@@ -40,5 +40,5 @@ jobs:
       - name: Publish image
         if: github.ref == 'master'
         run: |
-          docker login -u USER -p PASSWORD
+          docker login --username svcrezoleo --password ${{ secrets.DOCKER_HUB_TOKEN }}
           docker push rezoleo/github-project-automation:${APP_VERSION}
