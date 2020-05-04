@@ -26,3 +26,19 @@ jobs:
     name: Build & push
     runs-on: ubuntu-latest
     needs: test
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Extract version
+        run: echo "::set-env name=APP_VERSION::$(jq -r '.version' package.json)"
+
+      - name: Build image
+        run: docker build -t rezoleo/github-project-automation:${APP_VERSION} .
+
+      - name: Publish image
+        if: github.ref == 'master'
+        run: |
+          docker login -u USER -p PASSWORD
+          docker push rezoleo/github-project-automation:${APP_VERSION}
