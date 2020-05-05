@@ -7,6 +7,7 @@ RUN npm run build
 
 
 FROM node:12.16-alpine
+
 ENV NODE_ENV=production
 WORKDIR /app
 COPY package.json package-lock.json ./
