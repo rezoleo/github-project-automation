@@ -5,7 +5,7 @@
 
 ## Installation
 
-Install the app (TODO), then create a `.github/github-project-automation.yml` file with the following content:
+Install the GitHub app or create a new one (TODO), then create a `.github/github-project-automation.yml` file with the following content:
 ```yaml
 project: "Name of your project (mandatory)"
 
@@ -23,7 +23,7 @@ Note: only repository projects are supported at the moment, support for organiza
 ## Deployment
 
 If you want to run the code yourself you can follow Probot documentation for a standard install, or use the provided
-Dockerfile (or the image `rezoleo/github-project-automation` TODO). The following `docker-compose.yml` configuration is provided
+Dockerfile (or the image `rezoleo/github-project-automation`). The following `docker-compose.yml` configuration is provided
 as a reference:
 
 ```yaml
@@ -41,7 +41,7 @@ services:
         -----BEGIN RSA PRIVATE KEY-----
         your private key
         -----END RSA PRIVATE KEY-----
-      #LOG_LEVEL: debug  # if you need to debug something, default is "info" 
+      #LOG_LEVEL: debug  # if you need to debug something, default is "info"
 ```
 
 ## Development

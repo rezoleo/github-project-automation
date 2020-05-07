@@ -42,3 +42,5 @@ jobs:
         run: |
           docker login --username svcrezoleo --password ${{ secrets.DOCKER_HUB_TOKEN }}
           docker push rezoleo/github-project-automation:${APP_VERSION}
+          docker tag rezoleo/github-project-automation:${APP_VERSION} rezoleo/github-project-automation:latest
+          docker push rezoleo/github-project-automation:latest
