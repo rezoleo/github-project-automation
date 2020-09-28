@@ -124,6 +124,13 @@ default_permissions:
   # https://developer.github.com/v3/apps/permissions/
   # organization_administration: read
 
+  # Access a single file in a repository
+  # The file path must be configured with `singe_file_name` at the root of the YAML
+  # Thanks to this comment for help https://github.community/t/github-app-manifest-flow-for-single-file-read-write-permission/13846/2
+  # https://docs.github.com/v3/apps/permissions/#permission-on-single-file
+  single_file: read
+
+single_file_name: .github/github-project-automation.yml
 
 # The name of the GitHub App. Defaults to the name specified in package.json
 name: Project Automation by Nymous
