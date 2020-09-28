@@ -8,6 +8,7 @@ import { Probot } from 'probot'
 // Requiring our fixtures
 import issuePayload from './fixtures/issues.opened.json'
 import pullRequestPayload from './fixtures/pr.opened.json'
+import pullRequestDraftPayload from './fixtures/pr.draft.json'
 import projectsListPayload from './fixtures/projects.list.json'
 import columnsListPayload from './fixtures/columns.list.json'
 const fs = require('fs')
@@ -307,7 +308,7 @@ describe('My Probot app', () => {
 
       // Test that a comment is posted
       nock('https://api.github.com')
-        .post('/projects/columns/9006144/cards', (body: any) => {
+        .post('/projects/columns/9006145/cards', (body: any) => {
           done(expect(body).toMatchObject(pullRequestCardCreatedBody))
           return true
         })
@@ -315,6 +316,41 @@ describe('My Probot app', () => {
 
       // Receive a webhook event
       await probot.receive({ name: 'pull_request.opened', payload: pullRequestPayload })
+    })
+
+    test('creates a project card in the correct column if PR is draft', async (done) => {
+      // Test that we correctly return a test token
+      nock('https://api.github.com')
+        .post('/app/installations/8554425/access_tokens')
+        .reply(200, { token: 'test' })
+
+      // Load configuration from target repo
+      nock('https://api.github.com')
+        .get('/repos/nymous-experiments/.github/contents/.github/github-project-automation.yml')
+        .reply(404)
+        .get('/repos/nymous-experiments/demo-github-projects/contents/.github/github-project-automation.yml')
+        .reply(200, { content: toBase64(minimalConfig) })
+
+      // List projects
+      nock('https://api.github.com')
+        .get('/repos/nymous-experiments/demo-github-projects/projects')
+        .reply(200, projectsListPayload)
+
+      // List columns
+      nock('https://api.github.com')
+        .get('/projects/4436362/columns')
+        .reply(200, columnsListPayload)
+
+      // Test that a comment is posted
+      nock('https://api.github.com')
+        .post('/projects/columns/9006144/cards', (body: any) => {
+          done(expect(body).toMatchObject(pullRequestCardCreatedBody))
+          return true
+        })
+        .reply(201)
+
+      // Receive a webhook event
+      await probot.receive({ name: 'pull_request.opened', payload: pullRequestDraftPayload })
     })
 
     test('creates a project card in the correct column', async (done) => {
