@@ -19,7 +19,7 @@
     "dev": "npm run build:watch",
     "start": "probot run ./lib/index.js",
     "lint": "standard **/*.ts --fix",
-    "test": "jest && standard **/*.ts",
+    "test": "standard **/*.ts && jest",
     "test:watch": "jest --watchAll --notify --notifyMode=change --coverage"
   },
   "dependencies": {

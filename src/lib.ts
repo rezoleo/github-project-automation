@@ -2,7 +2,7 @@ import { Context, Octokit } from 'probot' // eslint-disable-line no-unused-vars
 
 interface DefaultConfig {
   issues: { column: string }
-  pullRequests: { column: string }
+  pullRequests: { columnDraft: string, column: string }
 }
 
 type Config = DefaultConfig & {project: string}
@@ -10,13 +10,14 @@ type Config = DefaultConfig & {project: string}
 const DEFAULT_CONFIG: DefaultConfig = {
   issues: { column: 'To do' },
   pullRequests: {
-    column: 'In progress'
+    columnDraft: 'In progress',
+    column: 'Review in progress'
   }
+
 }
 
 export async function getConfig (context: Context) {
   const config = await context.config<DefaultConfig>('github-project-automation.yml', DEFAULT_CONFIG) as Config
-
   if (!config.project) {
     throw new Error('`project` was not configured')
   }

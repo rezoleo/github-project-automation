@@ -13,7 +13,8 @@ project: "Name of your project (mandatory)"
 issues:
   column: "Column to send issues to (default 'To do')"
 pullRequests:
-  column: "Column to send PRs to (default 'In progress')"
+  columnDraft: "Column to send Draft PRs to (default 'In progress')"
+  column: "Column to send PRs to (default 'Review in progress')"
 ```
 
 The app will then automatically add any new issue or PR to the configured project.
